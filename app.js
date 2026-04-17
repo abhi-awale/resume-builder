@@ -16,20 +16,20 @@ const homeRoutes = require('./routes/home');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ─── Security Middleware ────────────────────────────────────────────
-// app.use(helmet({
-//   contentSecurityPolicy: {
-//     directives: {
-//       defaultSrc: ["'self'"],
-//       styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
-//       fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "https:" ],
-//       scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com"],
-//       imgSrc: ["'self'", "data:", "blob:"],
-//       connectSrc: ["'self'", "https://cdn.jsdelivr.net"],
-//     },
-//   },
-//   crossOriginEmbedderPolicy: false,
-// }));
+─── Security Middleware ────────────────────────────────────────────
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "https:" ],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com"],
+      imgSrc: ["'self'", "data:", "blob:"],
+      connectSrc: ["'self'", "https://cdn.jsdelivr.net"],
+    },
+  },
+  crossOriginEmbedderPolicy: false,
+}));
 
 // ─── Rate Limiting ──────────────────────────────────────────────────
 const generalLimiter = rateLimit({
