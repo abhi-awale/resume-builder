@@ -16,7 +16,7 @@ const homeRoutes = require('./routes/home');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-─── Security Middleware ────────────────────────────────────────────
+// ─── Security Middleware ────────────────────────────────────────────
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
