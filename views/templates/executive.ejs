@@ -56,9 +56,9 @@ function formatDate(d) {
         <% if(p.email) { %><div class="rex-contact"><i class="fas fa-envelope" style="color:<%= color %>;font-size:9px;"></i><%= p.email %></div><% } %>
         <% if(p.phone) { %><div class="rex-contact"><i class="fas fa-phone" style="color:<%= color %>;font-size:9px;"></i><%= p.phone %></div><% } %>
         <% if(p.location) { %><div class="rex-contact"><i class="fas fa-map-marker-alt" style="color:<%= color %>;font-size:9px;"></i><%= p.location %></div><% } %>
-        <% if(p.linkedin) { %><div class="rex-contact"><i class="fab fa-linkedin" style="color:<%= color %>;font-size:9px;"></i><%= p.linkedin.replace(/https?:\/\//,'') %></div><% } %>
-        <% if(p.github) { %><div class="rex-contact"><i class="fab fa-github" style="color:<%= color %>;font-size:9px;"></i><%= p.github.replace(/https?:\/\//,'') %></div><% } %>
-        <% if(p.website) { %><div class="rex-contact"><i class="fas fa-globe" style="color:<%= color %>;font-size:9px;"></i><%= p.website.replace(/https?:\/\//,'') %></div><% } %>
+        <% if(p.linkedin) { %><div class="rex-contact"><i class="fab fa-linkedin" style="color:<%= color %>;font-size:9px;"></i><%= p.linkedin %></div><% } %>
+        <% if(p.github) { %><div class="rex-contact"><i class="fab fa-github" style="color:<%= color %>;font-size:9px;"></i><%= p.github %></div><% } %>
+        <% if(p.website) { %><div class="rex-contact"><i class="fas fa-globe" style="color:<%= color %>;font-size:9px;"></i><%= p.website %></div><% } %>
       </div>
     </div>
   </div>
