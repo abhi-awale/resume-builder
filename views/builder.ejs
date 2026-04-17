@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title: title }) %>
+</head>
+<body class="builder-page">
+  <%- include('partials/nav') %>
+
+  <div class="builder-layout">
+    <!-- Sidebar -->
+    <aside class="builder-sidebar" id="builderSidebar">
+      <div class="sidebar-header">
+        <h6 class="sidebar-title"><i class="fas fa-layer-group me-2"></i>Sections</h6>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#section-personal" class="sidebar-link active" data-section="personal">
+          <i class="fas fa-user"></i><span>Personal Info</span>
+          <div class="section-status" id="status-personal"></div>
+        </a>
+        <a href="#section-summary" class="sidebar-link" data-section="summary">
+          <i class="fas fa-align-left"></i><span>Summary</span>
+        </a>
+        <a href="#section-experience" class="sidebar-link" data-section="experience">
+          <i class="fas fa-briefcase"></i><span>Experience</span>
+          <span class="count-badge" id="count-experience">0</span>
+        </a>
+        <a href="#section-education" class="sidebar-link" data-section="education">
+          <i class="fas fa-graduation-cap"></i><span>Education</span>
+          <span class="count-badge" id="count-education">0</span>
+        </a>
+        <a href="#section-skills" class="sidebar-link" data-section="skills">
+          <i class="fas fa-code"></i><span>Skills</span>
+          <span class="count-badge" id="count-skills">0</span>
+        </a>
+        <a href="#section-projects" class="sidebar-link" data-section="projects">
+          <i class="fas fa-rocket"></i><span>Projects</span>
+          <span class="count-badge" id="count-projects">0</span>
+        </a>
+        <a href="#section-certifications" class="sidebar-link" data-section="certifications">
+          <i class="fas fa-certificate"></i><span>Certifications</span>
+          <span class="count-badge" id="count-certifications">0</span>
+        </a>
+        <a href="#section-languages" class="sidebar-link" data-section="languages">
+          <i class="fas fa-language"></i><span>Languages</span>
+          <span class="count-badge" id="count-languages">0</span>
+        </a>
+        <a href="#section-design" class="sidebar-link" data-section="design">
+          <i class="fas fa-paint-brush"></i><span>Design</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="autosave-status" id="autosaveStatus">
+          <i class="fas fa-circle-notch fa-spin"></i> Auto-saving...
+        </div>
+        <a href="/resume/clear" class="btn btn-sm btn-outline-danger w-100 mt-2" 
+           onclick="return confirm('Clear all resume data?')">
+          <i class="fas fa-trash me-1"></i>Clear All
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Builder Area -->
+    <main class="builder-main">
+      <div class="builder-top-bar">
+        <button class="sidebar-toggle" id="sidebarToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h5 class="builder-page-title">Resume Builder</h5>
+        <div class="builder-actions">
+          <div class="progress-wrap">
+            <div class="progress-label">Completion</div>
+            <div class="progress rf-progress">
+              <div class="progress-bar" id="completionBar" style="width: 0%"></div>
+            </div>
+            <div class="progress-pct" id="completionPct">0%</div>
+          </div>
+          <button type="submit" form="resumeForm" class="btn btn-primary btn-preview">
+            <i class="fas fa-eye me-2"></i>Preview
+          </button>
+        </div>
+      </div>
+
+      <!-- Flash Messages -->
+      <% if (error && error.length > 0) { %>
+      <div class="alert alert-danger alert-dismissible fade show mx-4 mt-3" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i><%= error[0] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      <% } %>
+      <% if (success && success.length > 0) { %>
+      <div class="alert alert-success alert-dismissible fade show mx-4 mt-3" role="alert">
+        <i class="fas fa-check-circle me-2"></i><%= success[0] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      <% } %>
+
+      <form action="/resume/preview" method="POST" id="resumeForm" novalidate>
+
+        <!-- ── Personal Info ─────────────────────────── -->
+        <section class="form-section active" id="section-personal">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-user"></i></div>
+            <div>
+              <h3>Personal Information</h3>
+              <p>Your basic contact and identity details</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label required">Full Name</label>
+                <div class="input-group-rf">
+                  <i class="fas fa-user input-icon"></i>
+                  <input type="text" name="name" class="form-control rf-input" placeholder="John Doe" required maxlength="100"
+                    value="<%= resumeData?.personal?.name || '' %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Professional Title</label>
+                <div class="input-group-rf">
+                  <i class="fas fa-briefcase input-icon"></i>
+                  <input type="text" name="title" class="form-control rf-input" placeholder="Senior Software Engineer" maxlength="100"
+                    value="<%= resumeData?.personal?.title || '' %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email Address</label>
+                <div class="input-group-rf">
+                  <i class="fas fa-envelope input-icon"></i>
+                  <input type="email" name="email" class="form-control rf-input" placeholder="john@example.com"
+                    value="<%= resumeData?.personal?.email || '' %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Phone Number</label>
+                <div class="input-group-rf">
+                  <i class="fas fa-phone input-icon"></i>
+                  <input type="tel" name="phone" class="form-control rf-input" placeholder="+1 (555) 000-0000"
+                    value="<%= resumeData?.personal?.phone || '' %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Location</label>
+                <div class="input-group-rf">
+                  <i class="fas fa-map-marker-alt input-icon"></i>
+                  <input type="text" name="location" class="form-control rf-input" placeholder="San Francisco, CA"
+                    value="<%= resumeData?.personal?.location || '' %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Website / Portfolio</label>
+                <div class="input-group-rf">
+                  <i class="fas fa-globe input-icon"></i>
+                  <input type="url" name="website" class="form-control rf-input" placeholder="https://yoursite.com"
+                    value="<%= resumeData?.personal?.website || '' %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">LinkedIn URL</label>
+                <div class="input-group-rf">
+                  <i class="fab fa-linkedin input-icon"></i>
+                  <input type="url" name="linkedin" class="form-control rf-input" placeholder="https://linkedin.com/in/johndoe"
+                    value="<%= resumeData?.personal?.linkedin || '' %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">GitHub URL</label>
+                <div class="input-group-rf">
+                  <i class="fab fa-github input-icon"></i>
+                  <input type="url" name="github" class="form-control rf-input" placeholder="https://github.com/johndoe"
+                    value="<%= resumeData?.personal?.github || '' %>">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Summary ───────────────────────────────── -->
+        <section class="form-section" id="section-summary">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-align-left"></i></div>
+            <div>
+              <h3>Professional Summary</h3>
+              <p>A brief overview of who you are and what you bring</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <label class="form-label">Summary / Objective <span class="text-muted">(2-4 sentences recommended)</span></label>
+            <div class="textarea-wrap">
+              <textarea name="summary" class="form-control rf-textarea" rows="5" maxlength="800"
+                placeholder="Results-driven software engineer with 5+ years of experience building scalable web applications..."><%= resumeData?.personal?.summary || '' %></textarea>
+              <div class="char-counter"><span id="summaryCount">0</span>/800</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Experience ────────────────────────────── -->
+        <section class="form-section" id="section-experience">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-briefcase"></i></div>
+            <div>
+              <h3>Work Experience</h3>
+              <p>Your professional history (most recent first)</p>
+            </div>
+            <button type="button" class="btn btn-add ms-auto" id="addExperience">
+              <i class="fas fa-plus me-1"></i>Add Job
+            </button>
+          </div>
+          <div class="section-body">
+            <div id="experienceList" class="repeatable-list">
+              <% if (resumeData && resumeData.experience && resumeData.experience.length > 0) { %>
+                <% resumeData.experience.forEach((exp, i) => { %>
+                  <%- include('partials/exp-item', { exp, i }) %>
+                <% }) %>
+              <% } else { %>
+                <div class="empty-state" id="expEmptyState">
+                  <i class="fas fa-briefcase fa-2x mb-3 opacity-25"></i>
+                  <p>No experience added yet. Click "Add Job" to get started.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Education ─────────────────────────────── -->
+        <section class="form-section" id="section-education">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div>
+              <h3>Education</h3>
+              <p>Your academic background</p>
+            </div>
+            <button type="button" class="btn btn-add ms-auto" id="addEducation">
+              <i class="fas fa-plus me-1"></i>Add Education
+            </button>
+          </div>
+          <div class="section-body">
+            <div id="educationList" class="repeatable-list">
+              <% if (resumeData && resumeData.education && resumeData.education.length > 0) { %>
+                <% resumeData.education.forEach((edu, i) => { %>
+                  <%- include('partials/edu-item', { edu, i }) %>
+                <% }) %>
+              <% } else { %>
+                <div class="empty-state" id="eduEmptyState">
+                  <i class="fas fa-graduation-cap fa-2x mb-3 opacity-25"></i>
+                  <p>No education added yet.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Skills ────────────────────────────────── -->
+        <section class="form-section" id="section-skills">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-code"></i></div>
+            <div>
+              <h3>Skills</h3>
+              <p>Group your skills by category</p>
+            </div>
+            <button type="button" class="btn btn-add ms-auto" id="addSkill">
+              <i class="fas fa-plus me-1"></i>Add Category
+            </button>
+          </div>
+          <div class="section-body">
+            <div id="skillsList" class="repeatable-list">
+              <% if (resumeData && resumeData.skills && resumeData.skills.length > 0) { %>
+                <% resumeData.skills.forEach((skill, i) => { %>
+                  <%- include('partials/skill-item', { skill, i }) %>
+                <% }) %>
+              <% } else { %>
+                <div class="empty-state" id="skillsEmptyState">
+                  <i class="fas fa-code fa-2x mb-3 opacity-25"></i>
+                  <p>No skills added yet. Add categories like "Frontend", "Backend", "Tools" etc.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Projects ──────────────────────────────── -->
+        <section class="form-section" id="section-projects">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-rocket"></i></div>
+            <div>
+              <h3>Projects</h3>
+              <p>Showcase your notable work and side projects</p>
+            </div>
+            <button type="button" class="btn btn-add ms-auto" id="addProject">
+              <i class="fas fa-plus me-1"></i>Add Project
+            </button>
+          </div>
+          <div class="section-body">
+            <div id="projectsList" class="repeatable-list">
+              <% if (resumeData && resumeData.projects && resumeData.projects.length > 0) { %>
+                <% resumeData.projects.forEach((proj, i) => { %>
+                  <%- include('partials/proj-item', { proj, i }) %>
+                <% }) %>
+              <% } else { %>
+                <div class="empty-state" id="projEmptyState">
+                  <i class="fas fa-rocket fa-2x mb-3 opacity-25"></i>
+                  <p>No projects added yet.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Certifications ────────────────────────── -->
+        <section class="form-section" id="section-certifications">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-certificate"></i></div>
+            <div>
+              <h3>Certifications</h3>
+              <p>Professional certifications and licenses</p>
+            </div>
+            <button type="button" class="btn btn-add ms-auto" id="addCertification">
+              <i class="fas fa-plus me-1"></i>Add Certification
+            </button>
+          </div>
+          <div class="section-body">
+            <div id="certificationsList" class="repeatable-list">
+              <% if (resumeData && resumeData.certifications && resumeData.certifications.length > 0) { %>
+                <% resumeData.certifications.forEach((cert, i) => { %>
+                  <%- include('partials/cert-item', { cert, i }) %>
+                <% }) %>
+              <% } else { %>
+                <div class="empty-state" id="certEmptyState">
+                  <i class="fas fa-certificate fa-2x mb-3 opacity-25"></i>
+                  <p>No certifications added yet.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Languages ─────────────────────────────── -->
+        <section class="form-section" id="section-languages">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-language"></i></div>
+            <div>
+              <h3>Languages</h3>
+              <p>Languages you speak</p>
+            </div>
+            <button type="button" class="btn btn-add ms-auto" id="addLanguage">
+              <i class="fas fa-plus me-1"></i>Add Language
+            </button>
+          </div>
+          <div class="section-body">
+            <div id="languagesList" class="repeatable-list">
+              <% if (resumeData && resumeData.languages && resumeData.languages.length > 0) { %>
+                <% resumeData.languages.forEach((lang, i) => { %>
+                  <%- include('partials/lang-item', { lang, i }) %>
+                <% }) %>
+              <% } else { %>
+                <div class="empty-state" id="langEmptyState">
+                  <i class="fas fa-language fa-2x mb-3 opacity-25"></i>
+                  <p>No languages added yet.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Design ────────────────────────────────── -->
+        <section class="form-section" id="section-design">
+          <div class="section-title-bar">
+            <div class="section-icon"><i class="fas fa-paint-brush"></i></div>
+            <div>
+              <h3>Design & Theme</h3>
+              <p>Customize how your resume looks</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <label class="form-label mb-3">Choose Template</label>
+            <div class="template-selector row g-3 mb-4">
+              <% const templates = [
+                { id: 'modern', label: 'Modern', icon: 'fa-layer-group', color: '#6C63FF' },
+                { id: 'classic', label: 'Classic', icon: 'fa-scroll', color: '#2C3E50' },
+                { id: 'minimal', label: 'Minimal', icon: 'fa-minus', color: '#1ABC9C' },
+                { id: 'bold', label: 'Bold', icon: 'fa-bold', color: '#E74C3C' },
+                { id: 'creative', label: 'Creative', icon: 'fa-star', color: '#F39C12' },
+                { id: 'executive', label: 'Executive', icon: 'fa-crown', color: '#8E44AD' },
+              ]; %>
+              <% templates.forEach(t => { %>
+              <div class="col-6 col-md-4">
+                <label class="template-option" style="--tc: <%= t.color %>">
+                  <input type="radio" name="template" value="<%= t.id %>"
+                    <%= (resumeData?.template === t.id || (!resumeData?.template && t.id === 'modern')) ? 'checked' : '' %>>
+                  <div class="template-opt-inner">
+                    <i class="fas <%= t.icon %>"></i>
+                    <span><%= t.label %></span>
+                  </div>
+                </label>
+              </div>
+              <% }) %>
+            </div>
+
+            <label class="form-label mb-3">Accent Color</label>
+            <div class="color-palette">
+              <% const colors = ['#6C63FF','#E74C3C','#1ABC9C','#F39C12','#3498DB','#8E44AD','#2ECC71','#E91E63','#FF6B35','#2C3E50']; %>
+              <% colors.forEach(c => { %>
+              <button type="button" class="color-swatch" style="background: <%= c %>" data-color="<%= c %>"></button>
+              <% }) %>
+              <input type="color" id="customColor" class="color-custom" value="#6C63FF">
+              <label for="customColor" class="color-swatch color-custom-btn">
+                <i class="fas fa-plus"></i>
+              </label>
+            </div>
+            <input type="hidden" name="accentColor" id="accentColorInput"
+              value="<%= resumeData?.accentColor || '#6C63FF' %>">
+          </div>
+        </section>
+
+        <!-- Bottom Action Bar -->
+        <div class="builder-bottom-bar">
+          <div class="d-flex align-items-center gap-3">
+            <span class="save-indicator" id="saveIndicator">
+              <i class="fas fa-check-circle text-success me-1"></i>All changes saved
+            </span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-preview-main">
+            <i class="fas fa-eye me-2"></i>Preview & Download
+          </button>
+        </div>
+
+      </form>
+    </main>
+  </div>
+
+  <%- include('partials/scripts') %>
+  <script src="/js/builder.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<%
+const p = resumeData.personal;
+function formatDate(d) {
+  if (!d) return '';
+  const [y, m] = d.split('-');
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(m)-1] + ' ' + y;
+}
+%>
+<style>
+  .rex * { box-sizing:border-box; margin:0; padding:0; font-family:'Inter','Helvetica Neue',sans-serif; }
+  .rex { font-size:11px; line-height:1.6; color:#2c2c2c; }
+  .rex-topbar { background:<%= color %>; height:8px; }
+  .rex-header { padding:32px 44px 24px; border-bottom:2px solid #f0f0f0; }
+  .rex-header-inner { display:flex; justify-content:space-between; align-items:flex-start; }
+  .rex-name { font-size:28px; font-weight:800; letter-spacing:-0.5px; color:#111; }
+  .rex-title { font-size:13px; color:<%= color %>; font-weight:600; margin-top:4px; text-transform:uppercase; letter-spacing:1px; }
+  .rex-contacts { display:flex; flex-direction:column; gap:4px; text-align:right; font-size:10.5px; color:#666; }
+  .rex-contact { display:flex; align-items:center; justify-content:flex-end; gap:6px; }
+  .rex-body { padding:28px 44px; }
+  .rex-summary { background:<%= color %>08; border-left:4px solid <%= color %>; padding:14px 18px; border-radius:0 6px 6px 0; margin-bottom:24px; font-size:10.5px; color:#444; line-height:1.7; }
+  .rex-section { margin-bottom:22px; }
+  .rex-section-title { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:#111; margin-bottom:4px; display:flex; align-items:center; gap:10px; }
+  .rex-section-title::before { content:''; width:20px; height:3px; background:<%= color %>; border-radius:2px; flex-shrink:0; }
+  .rex-section-title::after { content:''; flex:1; height:1px; background:#eee; }
+  .rex-table { width:100%; border-collapse:collapse; }
+  .rex-exp-item { margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid #f5f5f5; }
+  .rex-exp-item:last-child { border-bottom:none; }
+  .rex-exp-row { display:flex; justify-content:space-between; margin-bottom:2px; }
+  .rex-exp-title { font-weight:700; font-size:12px; color:#111; }
+  .rex-exp-date { font-size:10.5px; color:#999; background:#f5f5f5; padding:2px 8px; border-radius:4px; }
+  .rex-exp-company { color:<%= color %>; font-weight:600; font-size:11px; margin-bottom:5px; }
+  .rex-exp-desc { font-size:10.5px; color:#555; white-space:pre-line; }
+  .rex-two { display:flex; gap:32px; }
+  .rex-col { flex:1; }
+  .rex-edu-item { margin-bottom:10px; }
+  .rex-edu-row { display:flex; justify-content:space-between; }
+  .rex-edu-school { font-weight:700; font-size:11px; }
+  .rex-edu-detail { font-size:10.5px; color:#666; }
+  .rex-skill-group { margin-bottom:8px; }
+  .rex-skill-group-name { font-weight:700; font-size:10.5px; color:#333; margin-bottom:3px; }
+  .rex-skill-tags { display:flex; flex-wrap:wrap; gap:4px; }
+  .rex-skill-tag { background:#f5f5f5; color:#444; padding:2px 9px; border-radius:4px; font-size:9.5px; border:1px solid #e8e8e8; }
+  .rex-cert-item { display:flex; justify-content:space-between; margin-bottom:6px; font-size:10.5px; }
+  .rex-lang-item { display:inline-flex; align-items:center; gap:5px; margin-right:12px; margin-bottom:4px; font-size:10.5px; }
+  .rex-lang-dot { width:6px; height:6px; border-radius:50%; background:<%= color %>; }
+</style>
+<div class="rex">
+  <div class="rex-topbar"></div>
+  <div class="rex-header">
+    <div class="rex-header-inner">
+      <div>
+        <div class="rex-name"><%= p.name || 'Your Name' %></div>
+        <% if(p.title) { %><div class="rex-title"><%= p.title %></div><% } %>
+      </div>
+      <div class="rex-contacts">
+        <% if(p.email) { %><div class="rex-contact"><i class="fas fa-envelope" style="color:<%= color %>;font-size:9px;"></i><%= p.email %></div><% } %>
+        <% if(p.phone) { %><div class="rex-contact"><i class="fas fa-phone" style="color:<%= color %>;font-size:9px;"></i><%= p.phone %></div><% } %>
+        <% if(p.location) { %><div class="rex-contact"><i class="fas fa-map-marker-alt" style="color:<%= color %>;font-size:9px;"></i><%= p.location %></div><% } %>
+        <% if(p.linkedin) { %><div class="rex-contact"><i class="fab fa-linkedin" style="color:<%= color %>;font-size:9px;"></i>LinkedIn</div><% } %>
+        <% if(p.github) { %><div class="rex-contact"><i class="fab fa-github" style="color:<%= color %>;font-size:9px;"></i>GitHub</div><% } %>
+        <% if(p.website) { %><div class="rex-contact"><i class="fas fa-globe" style="color:<%= color %>;font-size:9px;"></i>Portfolio</div><% } %>
+      </div>
+    </div>
+  </div>
+  <div class="rex-body">
+    <% if(p.summary) { %>
+    <div class="rex-summary"><%= p.summary %></div>
+    <% } %>
+
+    <% if(resumeData.experience && resumeData.experience.length > 0) { %>
+    <div class="rex-section">
+      <div class="rex-section-title">Professional Experience</div>
+      <% resumeData.experience.forEach(exp => { %>
+      <div class="rex-exp-item">
+        <div class="rex-exp-row">
+          <div class="rex-exp-title"><%= exp.position %></div>
+          <div class="rex-exp-date"><%= formatDate(exp.startDate) %> – <%= exp.current ? 'Present' : formatDate(exp.endDate) %></div>
+        </div>
+        <div class="rex-exp-company"><%= exp.company %></div>
+        <% if(exp.description) { %><div class="rex-exp-desc"><%= exp.description %></div><% } %>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <div class="rex-two">
+      <div class="rex-col">
+        <% if(resumeData.education && resumeData.education.length > 0) { %>
+        <div class="rex-section">
+          <div class="rex-section-title">Education</div>
+          <% resumeData.education.forEach(edu => { %>
+          <div class="rex-edu-item">
+            <div class="rex-edu-row">
+              <div class="rex-edu-school"><%= edu.school %></div>
+              <div style="font-size:10px;color:#aaa;"><%= formatDate(edu.endDate) %></div>
+            </div>
+            <div class="rex-edu-detail"><%= edu.degree %><% if(edu.field) { %>, <%= edu.field %><% } %><% if(edu.gpa) { %> · GPA: <%= edu.gpa %><% } %></div>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+
+        <% if(resumeData.projects && resumeData.projects.length > 0) { %>
+        <div class="rex-section">
+          <div class="rex-section-title">Projects</div>
+          <% resumeData.projects.forEach(proj => { %>
+          <div style="margin-bottom:9px;">
+            <div style="font-weight:700;font-size:11px;"><%= proj.name %></div>
+            <% if(proj.tech) { %><div style="font-size:10px;color:<%= color %>;"><%= proj.tech %></div><% } %>
+            <% if(proj.description) { %><div style="font-size:10.5px;color:#555;"><%= proj.description %></div><% } %>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="rex-col">
+        <% if(resumeData.skills && resumeData.skills.length > 0) { %>
+        <div class="rex-section">
+          <div class="rex-section-title">Skills</div>
+          <% resumeData.skills.forEach(s => { %>
+          <div class="rex-skill-group">
+            <div class="rex-skill-group-name"><%= s.category %></div>
+            <div class="rex-skill-tags">
+              <% (s.items||'').split(',').forEach(t => { const i=t.trim(); if(i) { %><span class="rex-skill-tag"><%= i %></span><% } }) %>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+
+        <% if(resumeData.certifications && resumeData.certifications.length > 0) { %>
+        <div class="rex-section">
+          <div class="rex-section-title">Certifications</div>
+          <% resumeData.certifications.forEach(c => { %>
+          <div class="rex-cert-item"><span><strong><%= c.name %></strong> — <%= c.issuer %></span><span style="color:#aaa;font-size:10px;"><%= formatDate(c.date) %></span></div>
+          <% }) %>
+        </div>
+        <% } %>
+
+        <% if(resumeData.languages && resumeData.languages.length > 0) { %>
+        <div class="rex-section">
+          <div class="rex-section-title">Languages</div>
+          <% resumeData.languages.forEach(l => { %>
+          <span class="rex-lang-item"><span class="rex-lang-dot"></span><%= l.name %> — <em style="color:#888;font-size:10px;"><%= l.level %></em></span>
+          <% }) %>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>

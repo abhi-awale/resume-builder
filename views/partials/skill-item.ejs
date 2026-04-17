@@ -1,0 +1,27 @@
+<div class="repeatable-item" data-index="<%= i %>">
+  <div class="item-header">
+    <div class="item-drag"><i class="fas fa-grip-vertical"></i></div>
+    <div class="item-title">
+      <strong><%= skill.category || 'New Skill Category' %></strong>
+    </div>
+    <div class="item-actions">
+      <button type="button" class="btn-item-toggle"><i class="fas fa-chevron-down"></i></button>
+      <button type="button" class="btn-item-remove"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label class="form-label required">Category</label>
+        <input type="text" name="skill_category[]" class="form-control rf-input" required
+          placeholder="Frontend" value="<%= skill.category || '' %>">
+      </div>
+      <div class="col-md-8">
+        <label class="form-label">Skills <span class="text-muted">(comma separated)</span></label>
+        <input type="text" name="skill_items[]" class="form-control rf-input"
+          placeholder="React, TypeScript, CSS, Webpack, Tailwind"
+          value="<%= skill.items || '' %>">
+      </div>
+    </div>
+  </div>
+</div>

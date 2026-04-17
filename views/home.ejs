@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title: title }) %>
+</head>
+<body class="home-page">
+  <%- include('partials/nav') %>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="badge-pill mb-3">
+            <span class="pulse-dot"></span>
+            Free · No Sign-up · Instant PDF
+          </div>
+          <h1 class="hero-title">
+            Craft a Resume<br>
+            <span class="gradient-text">That Gets You Hired</span>
+          </h1>
+          <p class="hero-sub">
+            Build a stunning, ATS-friendly resume in minutes. Choose from beautiful templates, 
+            fill in your details, and download as a professional PDF — completely free.
+          </p>
+          <div class="hero-actions">
+            <a href="/resume/builder" class="btn btn-primary btn-lg btn-glow me-3">
+              <i class="fas fa-magic me-2"></i>Build My Resume
+            </a>
+            <a href="#templates" class="btn btn-outline-light btn-lg">
+              <i class="fas fa-eye me-2"></i>View Templates
+            </a>
+          </div>
+          <div class="hero-stats mt-5">
+            <div class="stat-item">
+              <span class="stat-num" data-count="50000">0</span><span>+</span>
+              <p>Resumes Created</p>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num" data-count="6">0</span>
+              <p>Templates</p>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num" data-count="100">0</span><span>%</span>
+              <p>Free Forever</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left" data-aos-delay="200">
+          <div class="hero-visual">
+            <div class="resume-card-mock floating">
+              <div class="mock-header">
+                <div class="mock-avatar"></div>
+                <div class="mock-info">
+                  <div class="mock-line wide"></div>
+                  <div class="mock-line medium accent"></div>
+                  <div class="mock-line short"></div>
+                </div>
+              </div>
+              <div class="mock-section">
+                <div class="mock-label"></div>
+                <div class="mock-line wide"></div>
+                <div class="mock-line medium"></div>
+                <div class="mock-line wide"></div>
+              </div>
+              <div class="mock-section">
+                <div class="mock-label"></div>
+                <div class="mock-exp-row">
+                  <div class="mock-dot"></div>
+                  <div>
+                    <div class="mock-line medium"></div>
+                    <div class="mock-line short accent2"></div>
+                    <div class="mock-line wide dim"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mock-chips">
+                <div class="chip"></div><div class="chip"></div><div class="chip"></div>
+                <div class="chip sm"></div><div class="chip sm"></div>
+              </div>
+            </div>
+            <div class="floating-badge badge-hire">
+              <i class="fas fa-check-circle"></i> ATS Friendly
+            </div>
+            <div class="floating-badge badge-pdf">
+              <i class="fas fa-file-pdf"></i> PDF Export
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section py-6" id="features">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Why ResumeForge</span>
+        <h2 class="section-title">Everything You Need,<br>Nothing You Don't</h2>
+      </div>
+      <div class="row g-4">
+        <% const features = [
+          { icon: 'fa-shield-alt', color: 'feature-blue', title: 'Bank-Level Security', desc: 'Your data stays in your browser session — never stored on our servers. Built with Helmet.js, rate limiting, and XSS protection.' },
+          { icon: 'fa-bolt', color: 'feature-yellow', title: 'Instant PDF Download', desc: 'Get a pixel-perfect PDF in seconds using headless Chrome rendering. Your resume looks exactly as designed.' },
+          { icon: 'fa-palette', color: 'feature-purple', title: 'Multiple Templates', desc: 'Choose from Modern, Classic, Minimal, Bold, Creative and Executive templates — each crafted by designers.' },
+          { icon: 'fa-robot', color: 'feature-green', title: 'ATS Optimized', desc: 'All templates are optimized for Applicant Tracking Systems, increasing your chances of getting past automated filters.' },
+          { icon: 'fa-mobile-alt', color: 'feature-pink', title: 'Fully Responsive', desc: 'Build and preview your resume on any device — desktop, tablet or mobile. Works seamlessly everywhere.' },
+          { icon: 'fa-save', color: 'feature-orange', title: 'Auto-Save', desc: 'Your progress is automatically saved to your session. Come back anytime within 24 hours without losing data.' },
+        ]; %>
+        <% features.forEach((f, i) => { %>
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<%= i * 80 %>">
+          <div class="feature-card">
+            <div class="feature-icon <%= f.color %>">
+              <i class="fas <%= f.icon %>"></i>
+            </div>
+            <h4><%= f.title %></h4>
+            <p><%= f.desc %></p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-section py-6">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Simple Process</span>
+        <h2 class="section-title">Ready in 3 Easy Steps</h2>
+      </div>
+      <div class="steps-container">
+        <div class="step-line"></div>
+        <div class="row g-4 justify-content-center">
+          <% const steps = [
+            { num: '01', icon: 'fa-edit', title: 'Fill In Details', desc: 'Enter your personal info, work experience, education, skills and more using our intuitive form.' },
+            { num: '02', icon: 'fa-eye', title: 'Preview Live', desc: 'See your resume update in real-time. Switch templates and colors instantly to find your perfect look.' },
+            { num: '03', icon: 'fa-download', title: 'Download PDF', desc: 'Click download and get a professionally formatted PDF resume, ready to send to employers.' },
+          ]; %>
+          <% steps.forEach((s, i) => { %>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="<%= i * 150 %>">
+            <div class="step-card">
+              <div class="step-number"><%= s.num %></div>
+              <div class="step-icon">
+                <i class="fas <%= s.icon %>"></i>
+              </div>
+              <h4><%= s.title %></h4>
+              <p><%= s.desc %></p>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Templates Preview -->
+  <section class="templates-section py-6" id="templates">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Templates</span>
+        <h2 class="section-title">Choose Your Style</h2>
+      </div>
+      <div class="row g-4">
+        <% const templates = [
+          { id: 'modern', name: 'Modern', tag: 'Most Popular', color: '#6C63FF' },
+          { id: 'classic', name: 'Classic', tag: 'Professional', color: '#2C3E50' },
+          { id: 'minimal', name: 'Minimal', tag: 'Clean', color: '#1ABC9C' },
+          { id: 'bold', name: 'Bold', tag: 'Stand Out', color: '#E74C3C' },
+          { id: 'creative', name: 'Creative', tag: 'Unique', color: '#F39C12' },
+          { id: 'executive', name: 'Executive', tag: 'Senior Roles', color: '#8E44AD' },
+        ]; %>
+        <% templates.forEach((t, i) => { %>
+        <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
+          <div class="template-card" style="--t-color: <%= t.color %>">
+            <div class="template-preview">
+              <div class="tp-header" style="background: <%= t.color %>">
+                <div class="tp-avatar"></div>
+                <div class="tp-lines">
+                  <div class="tp-line w80"></div>
+                  <div class="tp-line w50 light"></div>
+                </div>
+              </div>
+              <div class="tp-body">
+                <div class="tp-section">
+                  <div class="tp-line w30 accent" style="background: <%= t.color %>"></div>
+                  <div class="tp-line w90"></div>
+                  <div class="tp-line w70"></div>
+                </div>
+                <div class="tp-section">
+                  <div class="tp-line w40 accent" style="background: <%= t.color %>"></div>
+                  <div class="tp-chip-row">
+                    <div class="tp-chip" style="border-color: <%= t.color %>"></div>
+                    <div class="tp-chip" style="border-color: <%= t.color %>"></div>
+                    <div class="tp-chip sm" style="border-color: <%= t.color %>"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="template-info">
+              <div>
+                <h5><%= t.name %></h5>
+                <span class="template-tag"><%= t.tag %></span>
+              </div>
+              <a href="/resume/builder" class="btn btn-sm btn-use">Use This</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <div class="text-center mt-5" data-aos="fade-up">
+        <a href="/resume/builder" class="btn btn-primary btn-lg btn-glow">
+          <i class="fas fa-rocket me-2"></i>Start Building Now — It's Free
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>
+
+  <%- include('partials/scripts') %>
+  <script>
+    // Counter animation
+    const counters = document.querySelectorAll('.stat-num');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.count);
+          let current = 0;
+          const step = Math.ceil(target / 60);
+          const timer = setInterval(() => {
+            current = Math.min(current + step, target);
+            el.textContent = current.toLocaleString();
+            if (current >= target) clearInterval(timer);
+          }, 25);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
+  </script>
+</body>
+</html>

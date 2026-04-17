@@ -1,0 +1,34 @@
+<div class="repeatable-item" data-index="<%= i %>">
+  <div class="item-header">
+    <div class="item-drag"><i class="fas fa-grip-vertical"></i></div>
+    <div class="item-title"><strong><%= cert.name || 'New Certification' %></strong></div>
+    <div class="item-actions">
+      <button type="button" class="btn-item-toggle"><i class="fas fa-chevron-down"></i></button>
+      <button type="button" class="btn-item-remove"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label required">Certification Name</label>
+        <input type="text" name="cert_name[]" class="form-control rf-input" required
+          placeholder="AWS Solutions Architect" value="<%= cert.name || '' %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Issuing Organization</label>
+        <input type="text" name="cert_issuer[]" class="form-control rf-input"
+          placeholder="Amazon Web Services" value="<%= cert.issuer || '' %>">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Date Earned</label>
+        <input type="month" name="cert_date[]" class="form-control rf-input"
+          value="<%= cert.date || '' %>">
+      </div>
+      <div class="col-md-8">
+        <label class="form-label">Credential URL</label>
+        <input type="url" name="cert_url[]" class="form-control rf-input"
+          placeholder="https://www.credly.com/badges/..." value="<%= cert.url || '' %>">
+      </div>
+    </div>
+  </div>
+</div>

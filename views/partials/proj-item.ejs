@@ -1,0 +1,34 @@
+<div class="repeatable-item" data-index="<%= i %>">
+  <div class="item-header">
+    <div class="item-drag"><i class="fas fa-grip-vertical"></i></div>
+    <div class="item-title"><strong><%= proj.name || 'New Project' %></strong></div>
+    <div class="item-actions">
+      <button type="button" class="btn-item-toggle"><i class="fas fa-chevron-down"></i></button>
+      <button type="button" class="btn-item-remove"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label required">Project Name</label>
+        <input type="text" name="proj_name[]" class="form-control rf-input" required
+          placeholder="My Awesome App" value="<%= proj.name || '' %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Technologies Used</label>
+        <input type="text" name="proj_tech[]" class="form-control rf-input"
+          placeholder="Node.js, React, PostgreSQL" value="<%= proj.tech || '' %>">
+      </div>
+      <div class="col-12">
+        <label class="form-label">Project URL</label>
+        <input type="url" name="proj_url[]" class="form-control rf-input"
+          placeholder="https://github.com/you/project" value="<%= proj.url || '' %>">
+      </div>
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        <textarea name="proj_desc[]" class="form-control rf-textarea" rows="3" maxlength="600"
+          placeholder="A full-stack e-commerce platform with real-time inventory management..."><%= proj.description || '' %></textarea>
+      </div>
+    </div>
+  </div>
+</div>

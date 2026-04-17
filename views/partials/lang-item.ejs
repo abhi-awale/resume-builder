@@ -1,0 +1,29 @@
+<div class="repeatable-item" data-index="<%= i %>">
+  <div class="item-header">
+    <div class="item-drag"><i class="fas fa-grip-vertical"></i></div>
+    <div class="item-title"><strong><%= lang.name || 'New Language' %></strong></div>
+    <div class="item-actions">
+      <button type="button" class="btn-item-toggle"><i class="fas fa-chevron-down"></i></button>
+      <button type="button" class="btn-item-remove"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label required">Language</label>
+        <input type="text" name="lang_name[]" class="form-control rf-input" required
+          placeholder="English" value="<%= lang.name || '' %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Proficiency Level</label>
+        <select name="lang_level[]" class="form-select rf-input">
+          <option value="">Select level...</option>
+          <% const levels = ['Native', 'Fluent', 'Advanced', 'Intermediate', 'Basic']; %>
+          <% levels.forEach(l => { %>
+          <option value="<%= l %>" <%= lang.level === l ? 'selected' : '' %>><%= l %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

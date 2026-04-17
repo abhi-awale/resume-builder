@@ -1,0 +1,125 @@
+<%
+const p = resumeData.personal;
+function formatDate(d) {
+  if (!d) return '';
+  const [y, m] = d.split('-');
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(m)-1] + ' ' + y;
+}
+%>
+<style>
+  .rb * { box-sizing:border-box; margin:0; padding:0; font-family:'Inter','Helvetica Neue',sans-serif; }
+  .rb { font-size:11px; line-height:1.5; color:#fff; background:#1a1a2e; }
+  .rb-top { background:<%= color %>; padding:36px 40px 28px; }
+  .rb-name { font-size:32px; font-weight:900; color:#fff; letter-spacing:-1px; text-transform:uppercase; margin-bottom:4px; }
+  .rb-title { font-size:13px; font-weight:500; color:rgba(255,255,255,0.85); margin-bottom:14px; letter-spacing:1px; }
+  .rb-contacts { display:flex; flex-wrap:wrap; gap:12px; }
+  .rb-contact { font-size:10.5px; color:rgba(255,255,255,0.8); display:flex; align-items:center; gap:5px; background:rgba(255,255,255,0.15); padding:4px 10px; border-radius:20px; }
+  .rb-body { display:flex; }
+  .rb-left { width:200px; flex-shrink:0; background:#16213e; padding:24px 20px; }
+  .rb-right { flex:1; padding:24px 28px; }
+  .rb-section { margin-bottom:20px; }
+  .rb-section-title { font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:<%= color %>; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+  .rb-section-title::after { content:''; flex:1; height:2px; background:<%= color %>30; }
+  .rb-exp-item { margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.07); }
+  .rb-exp-item:last-child { border-bottom:none; }
+  .rb-exp-title { font-weight:700; font-size:12px; color:#fff; margin-bottom:2px; }
+  .rb-exp-row { display:flex; justify-content:space-between; }
+  .rb-exp-company { color:<%= color %>; font-weight:600; font-size:11px; }
+  .rb-exp-date { font-size:10px; color:#888; }
+  .rb-exp-desc { font-size:10.5px; color:#aaa; white-space:pre-line; margin-top:5px; }
+  .rb-skill-tag { display:inline-block; background:rgba(255,255,255,0.07); color:<%= color %>; border:1px solid <%= color %>40; padding:3px 9px; border-radius:4px; font-size:9.5px; margin:2px; }
+  .rb-edu-item { margin-bottom:10px; font-size:10.5px; }
+  .rb-edu-school { font-weight:700; color:#fff; }
+  .rb-edu-detail { color:#aaa; font-size:10px; }
+  .rb-lang { display:flex; justify-content:space-between; font-size:10.5px; margin-bottom:6px; color:#ccc; }
+  .rb-lang-badge { background:<%= color %>; color:#fff; font-size:9px; padding:1px 7px; border-radius:20px; }
+</style>
+<div class="rb">
+  <div class="rb-top">
+    <div class="rb-name"><%= p.name || 'Your Name' %></div>
+    <% if(p.title) { %><div class="rb-title"><%= p.title %></div><% } %>
+    <div class="rb-contacts">
+      <% if(p.email) { %><span class="rb-contact">✉ <%= p.email %></span><% } %>
+      <% if(p.phone) { %><span class="rb-contact">☏ <%= p.phone %></span><% } %>
+      <% if(p.location) { %><span class="rb-contact">⌖ <%= p.location %></span><% } %>
+      <% if(p.website) { %><span class="rb-contact">⬡ Portfolio</span><% } %>
+      <% if(p.linkedin) { %><span class="rb-contact">in LinkedIn</span><% } %>
+      <% if(p.github) { %><span class="rb-contact">⌥ GitHub</span><% } %>
+    </div>
+  </div>
+  <div class="rb-body">
+    <div class="rb-left">
+      <% if(resumeData.skills && resumeData.skills.length > 0) { %>
+      <div class="rb-section">
+        <div class="rb-section-title">Skills</div>
+        <% resumeData.skills.forEach(s => { %>
+        <div style="margin-bottom:8px;">
+          <div style="font-size:9.5px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;"><%= s.category %></div>
+          <% (s.items||'').split(',').forEach(t => { const i=t.trim(); if(i) { %><span class="rb-skill-tag"><%= i %></span><% } }) %>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+      <% if(resumeData.education && resumeData.education.length > 0) { %>
+      <div class="rb-section">
+        <div class="rb-section-title">Education</div>
+        <% resumeData.education.forEach(edu => { %>
+        <div class="rb-edu-item">
+          <div class="rb-edu-school"><%= edu.school %></div>
+          <div class="rb-edu-detail"><%= edu.degree %><% if(edu.field) { %>, <%= edu.field %><% } %></div>
+          <div class="rb-edu-detail"><%= formatDate(edu.startDate) %> – <%= formatDate(edu.endDate) %></div>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+      <% if(resumeData.languages && resumeData.languages.length > 0) { %>
+      <div class="rb-section">
+        <div class="rb-section-title">Languages</div>
+        <% resumeData.languages.forEach(l => { %>
+        <div class="rb-lang"><span><%= l.name %></span><span class="rb-lang-badge"><%= l.level %></span></div>
+        <% }) %>
+      </div>
+      <% } %>
+      <% if(resumeData.certifications && resumeData.certifications.length > 0) { %>
+      <div class="rb-section">
+        <div class="rb-section-title">Certs</div>
+        <% resumeData.certifications.forEach(c => { %>
+        <div style="font-size:10.5px;color:#ccc;margin-bottom:6px;"><strong style="color:#fff;"><%= c.name %></strong><br><span style="color:#888;"><%= c.issuer %></span></div>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+    <div class="rb-right">
+      <% if(p.summary) { %>
+      <div class="rb-section">
+        <div class="rb-section-title">About Me</div>
+        <p style="font-size:10.5px;color:#bbb;line-height:1.65;"><%= p.summary %></p>
+      </div>
+      <% } %>
+      <% if(resumeData.experience && resumeData.experience.length > 0) { %>
+      <div class="rb-section">
+        <div class="rb-section-title">Experience</div>
+        <% resumeData.experience.forEach(exp => { %>
+        <div class="rb-exp-item">
+          <div class="rb-exp-title"><%= exp.position %></div>
+          <div class="rb-exp-row"><span class="rb-exp-company"><%= exp.company %></span><span class="rb-exp-date"><%= formatDate(exp.startDate) %> – <%= exp.current ? 'Present' : formatDate(exp.endDate) %></span></div>
+          <% if(exp.description) { %><div class="rb-exp-desc"><%= exp.description %></div><% } %>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+      <% if(resumeData.projects && resumeData.projects.length > 0) { %>
+      <div class="rb-section">
+        <div class="rb-section-title">Projects</div>
+        <% resumeData.projects.forEach(proj => { %>
+        <div style="margin-bottom:10px;">
+          <div style="font-weight:700;color:#fff;font-size:11px;"><%= proj.name %></div>
+          <% if(proj.tech) { %><div style="font-size:10px;color:<%= color %>;"><%= proj.tech %></div><% } %>
+          <% if(proj.description) { %><div style="font-size:10.5px;color:#aaa;"><%= proj.description %></div><% } %>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>

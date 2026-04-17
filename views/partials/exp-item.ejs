@@ -1,0 +1,54 @@
+<div class="repeatable-item" data-index="<%= i %>">
+  <div class="item-header">
+    <div class="item-drag"><i class="fas fa-grip-vertical"></i></div>
+    <div class="item-title">
+      <strong><%= exp.position || 'New Position' %></strong>
+      <span class="text-muted"> @ <%= exp.company || '' %></span>
+    </div>
+    <div class="item-actions">
+      <button type="button" class="btn-item-toggle" aria-label="Toggle">
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <button type="button" class="btn-item-remove" aria-label="Remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label required">Company / Organization</label>
+        <input type="text" name="exp_company[]" class="form-control rf-input" required
+          placeholder="Acme Corp" value="<%= exp.company || '' %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label required">Job Title</label>
+        <input type="text" name="exp_position[]" class="form-control rf-input" required
+          placeholder="Senior Developer" value="<%= exp.position || '' %>">
+      </div>
+      <div class="col-md-5">
+        <label class="form-label">Start Date</label>
+        <input type="month" name="exp_start[]" class="form-control rf-input"
+          value="<%= exp.startDate || '' %>">
+      </div>
+      <div class="col-md-5">
+        <label class="form-label">End Date</label>
+        <input type="month" name="exp_end[]" class="form-control rf-input end-date-field"
+          value="<%= exp.endDate || '' %>" <%= exp.current ? 'disabled' : '' %>>
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <div class="form-check mb-2">
+          <input class="form-check-input current-job-check" type="checkbox" name="exp_current[]"
+            id="expCurrent<%= i %>" <%= exp.current ? 'checked' : '' %>>
+          <label class="form-check-label" for="expCurrent<%= i %>">Current</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Description / Achievements</label>
+        <textarea name="exp_desc[]" class="form-control rf-textarea" rows="4" maxlength="1000"
+          placeholder="• Led development of microservices architecture serving 1M+ users&#10;• Reduced API response time by 40%&#10;• Mentored a team of 4 junior developers"><%= exp.description || '' %></textarea>
+        <div class="form-hint">Use bullet points (•) for achievements. Focus on impact and metrics.</div>
+      </div>
+    </div>
+  </div>
+</div>

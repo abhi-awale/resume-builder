@@ -1,0 +1,47 @@
+<div class="repeatable-item" data-index="<%= i %>">
+  <div class="item-header">
+    <div class="item-drag"><i class="fas fa-grip-vertical"></i></div>
+    <div class="item-title">
+      <strong><%= edu.degree || 'New Degree' %></strong>
+      <span class="text-muted"> @ <%= edu.school || '' %></span>
+    </div>
+    <div class="item-actions">
+      <button type="button" class="btn-item-toggle"><i class="fas fa-chevron-down"></i></button>
+      <button type="button" class="btn-item-remove"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label required">School / University</label>
+        <input type="text" name="edu_school[]" class="form-control rf-input" required
+          placeholder="MIT" value="<%= edu.school || '' %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Degree</label>
+        <input type="text" name="edu_degree[]" class="form-control rf-input"
+          placeholder="Bachelor of Science" value="<%= edu.degree || '' %>">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Field of Study</label>
+        <input type="text" name="edu_field[]" class="form-control rf-input"
+          placeholder="Computer Science" value="<%= edu.field || '' %>">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">GPA</label>
+        <input type="text" name="edu_gpa[]" class="form-control rf-input"
+          placeholder="3.8" value="<%= edu.gpa || '' %>">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Start</label>
+        <input type="month" name="edu_start[]" class="form-control rf-input"
+          value="<%= edu.startDate || '' %>">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">End</label>
+        <input type="month" name="edu_end[]" class="form-control rf-input"
+          value="<%= edu.endDate || '' %>">
+      </div>
+    </div>
+  </div>
+</div>

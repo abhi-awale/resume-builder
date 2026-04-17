@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('partials/head', { title: title }) %></head>
+<body style="background:#0f0f1a;display:flex;align-items:center;justify-content:center;min-height:100vh;">
+  <div style="text-align:center;color:#fff;">
+    <div style="font-size:72px;font-weight:900;font-family:'Syne',sans-serif;color:#E74C3C;"><%= status || 500 %></div>
+    <h2 style="font-family:'Syne',sans-serif;margin:0 0 12px;"><%= title %></h2>
+    <p style="color:rgba(255,255,255,0.5);margin-bottom:24px;"><%= message %></p>
+    <a href="/" style="background:#6C63FF;color:#fff;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:600;">Go Home</a>
+  </div>
+</body>
+</html>
