@@ -7,7 +7,7 @@ function formatDate(d) {
 }
 %>
 <style>
-  .rcr * { box-sizing:border-box; margin:0; padding:0; font-family:'Inter','Helvetica Neue',sans-serif; }
+  .rcr * { box-sizing:border-box; margin:0; padding:0; }
   .rcr { font-size:11px; line-height:1.55; color:#333; display:flex; min-height:1123px; }
   .rcr-left { width:240px; flex-shrink:0; background:<%= color %>; color:#fff; padding:36px 24px; }
   .rcr-avatar { width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,0.25); margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:700; }
@@ -54,9 +54,9 @@ function formatDate(d) {
     <% if(p.email) { %><div class="rcr-contact-item"><i class="fas fa-envelope"></i><span><%= p.email %></span></div><% } %>
     <% if(p.phone) { %><div class="rcr-contact-item"><i class="fas fa-phone"></i><span><%= p.phone %></span></div><% } %>
     <% if(p.location) { %><div class="rcr-contact-item"><i class="fas fa-map-marker-alt"></i><span><%= p.location %></span></div><% } %>
-    <% if(p.website) { %><div class="rcr-contact-item"><i class="fas fa-globe"></i><span>Portfolio</span></div><% } %>
-    <% if(p.linkedin) { %><div class="rcr-contact-item"><i class="fab fa-linkedin"></i><span>LinkedIn</span></div><% } %>
-    <% if(p.github) { %><div class="rcr-contact-item"><i class="fab fa-github"></i><span>GitHub</span></div><% } %>
+    <% if(p.website) { %><div class="rcr-contact-item"><i class="fas fa-globe"></i><span><%= p.website.replace(/https?:\/\//,'') %></span></div><% } %>
+    <% if(p.linkedin) { %><div class="rcr-contact-item"><i class="fab fa-linkedin"></i><span><%= p.linkedin.replace(/https?:\/\//,'') %></span></div><% } %>
+    <% if(p.github) { %><div class="rcr-contact-item"><i class="fab fa-github"></i><span><%= p.github.replace(/https?:\/\//,'') %></span></div><% } %>
 
     <% if(resumeData.skills && resumeData.skills.length > 0) { %>
     <hr class="rcr-divider">

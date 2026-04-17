@@ -43,8 +43,8 @@ function formatDate(d) {
     <% if (p.phone) { %><span>✆ <%= p.phone %></span><% } %>
     <% if (p.location) { %><span>⌖ <%= p.location %></span><% } %>
     <% if (p.website) { %><span>🌐 <%= p.website.replace(/https?:\/\//,'') %></span><% } %>
-    <% if (p.linkedin) { %><span>in LinkedIn</span><% } %>
-    <% if (p.github) { %><span>⌥ GitHub</span><% } %>
+    <% if (p.linkedin) { %><span>in <%= p.linkedin.replace(/https?:\/\//,'') %></span><% } %>
+    <% if (p.github) { %><span>⌥ <%= p.github.replace(/https?:\/\//,'') %></span><% } %>
   </div>
   <hr class="rc-divider">
 

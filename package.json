@@ -4,27 +4,27 @@
   "description": "Production-grade Resume Builder",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node --watch app.js",
     "dev": "nodemon app.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.2.2",
+    "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
-    "helmet": "^7.1.0",
+    "express": "^4.18.2",
     "express-rate-limit": "^7.1.5",
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
-    "compression": "^1.7.4",
-    "morgan": "^1.10.0",
-    "uuid": "^9.0.0",
-    "multer": "^1.4.5-lts.1",
-    "sanitize-html": "^2.11.0",
-    "xss": "^1.0.14",
-    "puppeteer": "^21.5.2",
-    "dotenv": "^16.3.1",
+    "helmet": "^7.1.0",
     "method-override": "^3.0.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.6",
-    "csurf": "^1.11.0"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "puppeteer": "^24.41.0",
+    "sanitize-html": "^2.11.0",
+    "uuid": "^9.0.0",
+    "xss": "^1.0.14"
   }
 }

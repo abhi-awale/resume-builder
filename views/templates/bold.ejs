@@ -42,9 +42,9 @@ function formatDate(d) {
       <% if(p.email) { %><span class="rb-contact">✉ <%= p.email %></span><% } %>
       <% if(p.phone) { %><span class="rb-contact">☏ <%= p.phone %></span><% } %>
       <% if(p.location) { %><span class="rb-contact">⌖ <%= p.location %></span><% } %>
-      <% if(p.website) { %><span class="rb-contact">⬡ Portfolio</span><% } %>
-      <% if(p.linkedin) { %><span class="rb-contact">in LinkedIn</span><% } %>
-      <% if(p.github) { %><span class="rb-contact">⌥ GitHub</span><% } %>
+      <% if(p.website) { %><span class="rb-contact">⬡ <%= p.website.replace(/https?:\/\//,'') %></span><% } %>
+      <% if(p.linkedin) { %><span class="rb-contact">in <%= p.linkedin.replace(/https?:\/\//,'') %></span><% } %>
+      <% if(p.github) { %><span class="rb-contact">⌥ <%= p.github.replace(/https?:\/\//,'') %></span><% } %>
     </div>
   </div>
   <div class="rb-body">

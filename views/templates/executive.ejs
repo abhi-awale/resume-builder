@@ -7,7 +7,7 @@ function formatDate(d) {
 }
 %>
 <style>
-  .rex * { box-sizing:border-box; margin:0; padding:0; font-family:'Inter','Helvetica Neue',sans-serif; }
+  .rex * { box-sizing:border-box; margin:0; padding:0;}
   .rex { font-size:11px; line-height:1.6; color:#2c2c2c; }
   .rex-topbar { background:<%= color %>; height:8px; }
   .rex-header { padding:32px 44px 24px; border-bottom:2px solid #f0f0f0; }
@@ -56,9 +56,9 @@ function formatDate(d) {
         <% if(p.email) { %><div class="rex-contact"><i class="fas fa-envelope" style="color:<%= color %>;font-size:9px;"></i><%= p.email %></div><% } %>
         <% if(p.phone) { %><div class="rex-contact"><i class="fas fa-phone" style="color:<%= color %>;font-size:9px;"></i><%= p.phone %></div><% } %>
         <% if(p.location) { %><div class="rex-contact"><i class="fas fa-map-marker-alt" style="color:<%= color %>;font-size:9px;"></i><%= p.location %></div><% } %>
-        <% if(p.linkedin) { %><div class="rex-contact"><i class="fab fa-linkedin" style="color:<%= color %>;font-size:9px;"></i>LinkedIn</div><% } %>
-        <% if(p.github) { %><div class="rex-contact"><i class="fab fa-github" style="color:<%= color %>;font-size:9px;"></i>GitHub</div><% } %>
-        <% if(p.website) { %><div class="rex-contact"><i class="fas fa-globe" style="color:<%= color %>;font-size:9px;"></i>Portfolio</div><% } %>
+        <% if(p.linkedin) { %><div class="rex-contact"><i class="fab fa-linkedin" style="color:<%= color %>;font-size:9px;"></i><%= p.linkedin.replace(/https?:\/\//,'') %></div><% } %>
+        <% if(p.github) { %><div class="rex-contact"><i class="fab fa-github" style="color:<%= color %>;font-size:9px;"></i><%= p.github.replace(/https?:\/\//,'') %></div><% } %>
+        <% if(p.website) { %><div class="rex-contact"><i class="fas fa-globe" style="color:<%= color %>;font-size:9px;"></i><%= p.website.replace(/https?:\/\//,'') %></div><% } %>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ function formatDate(d) {
 }
 %>
 <style>
-  .rm * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', sans-serif; }
+  .rm * { box-sizing: border-box; margin: 0; padding: 0; }
   .rm { font-size: 11px; line-height: 1.5; color: #2d2d2d; }
   .rm-header { background: <%= color %>; color: #fff; padding: 32px 36px 28px; }
   .rm-name { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
@@ -58,8 +58,8 @@ function formatDate(d) {
       <% if (p.phone) { %><span class="rm-contact"><i class="fas fa-phone"></i><%= p.phone %></span><% } %>
       <% if (p.location) { %><span class="rm-contact"><i class="fas fa-map-marker-alt"></i><%= p.location %></span><% } %>
       <% if (p.website) { %><span class="rm-contact"><i class="fas fa-globe"></i><%= p.website.replace(/https?:\/\//,'') %></span><% } %>
-      <% if (p.linkedin) { %><span class="rm-contact"><i class="fab fa-linkedin"></i>LinkedIn</span><% } %>
-      <% if (p.github) { %><span class="rm-contact"><i class="fab fa-github"></i>GitHub</span><% } %>
+      <% if (p.linkedin) { %><span class="rm-contact"><i class="fab fa-linkedin"></i><%= p.linkedin.replace(/https?:\/\//,'') %></span><% } %>
+      <% if (p.github) { %><span class="rm-contact"><i class="fab fa-github"></i><%= p.github.replace(/https?:\/\//,'') %></span><% } %>
     </div>
   </div>
 
