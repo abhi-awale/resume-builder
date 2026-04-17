@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "postinstall": "node node_modules/puppeteer/install.mjs"
   },
   "dependencies": {
     "express": "^4.19.2",
